@@ -32,7 +32,7 @@
 				<li class="nav-item">
 					<a href="/login" class="nav-link">Sign In</a>
 				</li>
-			@endauth				
+			@endguest				
 			</ul>
 		  </div>
 		</nav>
