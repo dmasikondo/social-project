@@ -11,10 +11,18 @@
 		      <li class="nav-item">
 		        <a class="nav-link" href="#">Friends</a>
 		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="#">Pricing</a>
-		      </li>
+		    <form action="/search" class="form-inline">
+		    	@csrf
+		    	<div class="form-group">
+		    		<input type="text" class="form-control" placeholder="Find people" name="query">
+			    	<button class="btn btn-outline-success" type="submit">
+			    		<span class="icon-search icon-white">Search</span>
+			    	</button>		    		
+		    	</div>
+
+		    </form>		      
 		    </ul>
+
 			<ul class="navbar-nav">
 			@auth
 				<li class="nav-item dropdown">

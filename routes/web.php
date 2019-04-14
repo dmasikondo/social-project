@@ -26,4 +26,7 @@ Route::get('/logout',[
 	'uses' => 'HomeController@logout',
 	'as' => 'logout',
 ]);
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/search',[
+	'uses' =>'SearchController@getResults',
+	'as' => 'search',
+]);
