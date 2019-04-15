@@ -13,9 +13,6 @@ class SearchController extends Controller
    	if(!$query){
    		return redirect()->route('home');
    	}
-   /*	$users = User::where('first_name','LIKE', "%{$query}%")
-   					->orWhere('last_name','LIKE', "%{$query}%")
-   					->get();*/
    		$users = User::where(\DB::raw("CONCAT(first_name,' ', last_name)"), 'LIKE',"%{$query}%")
    				->orWhere('location','LIKE',"%{$query}%")
    				->get();

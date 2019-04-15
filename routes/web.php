@@ -30,3 +30,18 @@ Route::get('/search',[
 	'uses' =>'SearchController@getResults',
 	'as' => 'search',
 ]);
+
+Route::get('/user/{email}',[
+	'uses' => 'ProfileController@getProfile',
+	'as' =>'user-profile',
+]);
+
+Route::get('/user-profile/edit',[
+	'uses' =>'ProfileController@edit',
+	'as' => 'user-profile.edit',
+]);
+
+Route::patch('/user-profile/edit',[
+	'uses' =>'ProfileController@update',
+	'as' => 'post.user-profile',
+]);

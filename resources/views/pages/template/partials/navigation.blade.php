@@ -28,7 +28,7 @@
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" id="navbarDropDownMenuLink" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">{{ Auth::user()->email }}</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
-						<a href="" class="dropdown-item">Update Profile</a>
+						<a href="{{route('user-profile.edit')}}" class="dropdown-item">Update Profile</a>
 						<a href="/logout" class="dropdown-item">Logout</a>
 					</div>
 				</li>
