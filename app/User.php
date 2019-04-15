@@ -59,4 +59,68 @@ class User extends Authenticatable
             ->merge($this->friendsOf()->wherePivot('accepted', true)
             ->get());
     }
+
+    /**
+     * user's friend requests
+     * @return Social\User;
+     */
+    public function friendRequests()
+    {
+        return $this->friendsOfMine()->wherePivot('accepted', false)->get();
+    }
+    /**
+     * friend requests sent by user that have not yet been responded to
+     * @return Social\User;
+     */
+    public function friendRequestsPending()
+    {
+        return $this->friendsOf()->wherePivot('accepted', false)->get();
+    }
+    /**
+     * check whether the current user has a pending friendship request from this other user
+     * @param  User    $user 
+     * @return boolean  
+     */
+    public function hasFriendRequestPending(User $user)
+    {
+        return (bool) $this->friendRequestsPending()->where('id',$user->id)->count();
+    }
+
+    /**
+     * check whether a friendship request has been received from this other user
+     * @param  User    $user 
+     * @return boolean  
+     */
+    public function hasFriendRequestReceived(User $user)
+    {
+        return (bool) $this->friendRequests()->where('id',$user->id)->count();
+    }   
+    /**
+     * add a friend request
+     * @param User $user
+     */
+    public function addFriend(User $user) 
+    {
+        return $this->friendsOf()->attach($user->id);
+    }
+    /**
+     * accept the friend request
+     * @param  User   $user [description]
+     * @return [type]       [description]
+     */
+    public function acceptFriendRequest(User $user)
+    {
+        return $this->friendRequests()->where('id', $user->id)->first()->pivot->update([
+                'accepted' => true,
+        ]);
+    }
+    /**
+     * check if user is friends with a particular user
+     * @param  User    $user [description]
+     * @return boolean       [description]
+     */
+    public function isFriendsWith(User $user)
+    {
+        return (bool) $this->friends()->where('id',$user->id)->count();
+    }
 }
