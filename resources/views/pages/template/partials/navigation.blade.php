@@ -9,7 +9,7 @@
 		        <a class="nav-link" href="#">Timeline <span class="sr-only">(current)</span></a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="#">Friends</a>
+		        <a class="nav-link" href="{{route('friends')}}">Friends</a>
 		      </li>
 		    <form action="/search" class="form-inline">
 		    	@csrf

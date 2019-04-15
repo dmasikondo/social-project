@@ -45,3 +45,8 @@ Route::patch('/user-profile/edit',[
 	'uses' =>'ProfileController@update',
 	'as' => 'post.user-profile',
 ]);
+
+Route::get('/friends',[
+	'uses'=>'FriendController@index',
+	'as' => 'friends',
+]);

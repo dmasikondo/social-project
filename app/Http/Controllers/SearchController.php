@@ -18,4 +18,6 @@ class SearchController extends Controller
    				->get();
    	return view('search.results', compact('users'));
    }
+
+   
 }

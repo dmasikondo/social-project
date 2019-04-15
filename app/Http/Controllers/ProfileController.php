@@ -8,12 +8,20 @@ use Auth;
 
 class ProfileController extends Controller
 {
+	/**
+	 * [getProfile description]
+	 * @param  [type] $email [description]
+	 * @return [type]        [description]
+	 */
     public function getProfile($email)
     {
     	$user = User::where('email',$email)->firstOrFail();
     	return view('profile.index', compact('user'));
     }
-
+    /**
+     * [edit description]
+     * @return [type] [description]
+     */
     public function edit()
     {
     	return view('profile.edit');
@@ -36,4 +44,5 @@ class ProfileController extends Controller
     	return redirect()->route('user-profile.edit')->with('info','Your profile was successfully updated');
     	
     }
+
 }
