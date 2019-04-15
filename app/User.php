@@ -42,5 +42,21 @@ class User extends Authenticatable
         return $this->first_name ? : $this->email;
     }
 
+    public function friendsOfMine()
+    {
+        return $this->belongsToMany('Social\User', 'friends','user_id', 'friend_id');
+    }
 
+    public function friendsOf()
+    {
+        return $this->belongsToMany('Social\User', 'friends','friend_id', 'user_id');
+    }    
+
+    public function friends()
+    {
+        return $this->friendsOfMine()->wherePivot('accepted', true)
+            ->get()
+            ->merge($this->friendsOf()->wherePivot('accepted', true)
+            ->get());
+    }
 }
