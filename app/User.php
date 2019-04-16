@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     public function getFirstNameOrEmail()
     {
-        return $this->first_name ? : $this->email;
+        return ucwords($this->first_name) ? : $this->email;
     }
 
     public function friendsOfMine()
@@ -122,5 +122,10 @@ class User extends Authenticatable
     public function isFriendsWith(User $user)
     {
         return (bool) $this->friends()->where('id',$user->id)->count();
+    }
+
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
     }
 }

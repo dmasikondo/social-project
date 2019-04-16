@@ -46,7 +46,7 @@ class FriendController extends Controller
 			return redirect()->route('home');
 		}
     	Auth::user()->addFriend($user);
-    	return redirect('/user/'.$user->email)->with('info','Frienship request successfully sent');
+    	return redirect('/user/'.$user->email)->with('info','Friend request successfully sent');
     }
 
     public function acceptFriend($usermail)

@@ -64,8 +64,17 @@ Route::get('/friend/{usermail}/add',[
 	'uses'=>'FriendController@addFriend',
 	'as' => 'add-friend',
 ]);
-
+/**
+ * accept friend request
+ */
 Route::get('/friend/{usermail}/accept',[
 	'uses'=>'FriendController@acceptFriend',
 	'as' => 'accept-friend',
+]);
+/**
+ * post a status
+ */
+Route::post('/status',[
+	'uses'=>'StatusController@postStatus',
+	'as' => 'status',
 ]);

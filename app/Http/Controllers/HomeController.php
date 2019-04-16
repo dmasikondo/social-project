@@ -1,7 +1,8 @@
 <?php
 
 namespace Social\Http\Controllers;
-
+use Auth;
+use Social\Status;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(Auth::user()){
+            $statuses = Status::where(function($query)
+            {
+                return $query->where('user_id', Auth::user()->id)
+                ->orWhereIn('user_id', Auth::user()->friends()->pluck('id'));
+            })->orderBy('created_at','desc')->paginate(2);
+            return view('pages.home',compact('statuses'));
+        }
+        
         return view('pages.home');
     }
 
