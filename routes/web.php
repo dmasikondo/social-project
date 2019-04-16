@@ -78,3 +78,10 @@ Route::post('/status',[
 	'uses'=>'StatusController@postStatus',
 	'as' => 'status',
 ]);
+/**
+ * post a reply to a status
+ */
+Route::post('/status/{statusId}/reply',[
+	'uses'=>'StatusController@postReply',
+	'as' => 'status-reply',
+]);

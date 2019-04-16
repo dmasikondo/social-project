@@ -36,27 +36,31 @@
 								<li class="list-inline-item"><a href="#">Like</a></li>
 								<li class="list-inline-item">10 likes</li>
 							</ul>
+						<!-- show replies -->
+						@foreach($status->replies as $reply)
 							<div class="media">
 								<span class="fa fa-user mr-2 mt-3"></span>
 								<div class="media-body">
 									<h5 class="media-heading">
-										<a href="#">Another</a>
+										<a href="/user/{{$reply->user->email}}">{{$reply->user->getFirstNameOrEmail()}}</a>
 									</h5>
-									<p>This is my response to your status</p>
+									<p>{{$reply->body}}</p>
 									<ul class="list-inline">
-										<li class="list-inline-item">9 minutes ago</li>
+										<li class="list-inline-item">{{$reply->created_at->diffForHumans()}}</li>
 										<li class="list-inline-item"><a href="#">Like</a></li>
 										<li class="list-inline-item">3 likes</li>
 									</ul>
 								</div>
 							</div>
-							<form action="#" method="">
+						@endforeach
+						<!-- show reply form -->
+							<form action="{{route('status-reply',['statusId' =>$status->id])}}" method="post">
 								@csrf
 								<div class="form-group">
-									<textarea name="reply" id="reply" cols="30" rows="3" class="form-control {{$errors->has('reply')? 'is-invalid': ''}}" placeholder="What's your reaction {{Auth::user()->getFirstNameOrEmail()}}?"></textarea>
-									@if($errors->has('reply'))
+									<textarea name="reply-{{$status->id}}" id="reply-{{$status->id}}" cols="30" rows="3" class="form-control {{$errors->has("reply-{$status->id}")? 'is-invalid': ''}}" placeholder="What's your reaction {{Auth::user()->getFirstNameOrEmail()}}?"></textarea>
+									@if($errors->has("reply-{$status->id}"))
 										<span class="invalid-feedback" role="alert">
-											<strong>{{$errors->first('reply')}}</strong>
+											<strong>{{$errors->first("reply-{$status->id}")}}</strong>
 										</span>
 									@endif
 								</div>
