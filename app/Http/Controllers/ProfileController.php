@@ -18,6 +18,7 @@ class ProfileController extends Controller
     	$user = User::where('email',$email)->firstOrFail();
     	$statuses = $user->statuses()->notReply()->orderBy('created_at','desc')->paginate(2);
     	$authUserIsFriend = $user->isFriendsWith(Auth::user());
+    	//dd($statuses->toArray());
     	return view('profile.index', compact('user','statuses','authUserIsFriend'));
     }
     /**

@@ -13,8 +13,14 @@
 							<p>{{$status->body}}</p>
 							<ul class="list-inline">
 								<li class="list-inline-item">{{$status->created_at->diffForHumans()}}</li>
-								<li class="list-inline-item"><a href="#">Like</a></li>
-								<li class="list-inline-item">10 likes</li>
+								<li class="list-inline-item">
+									@if(!$status->alreadyLikedByUser())
+										<a href="{{route('like-status',['statusToLike' =>$status->id])}}">Like</a>
+									@else
+										<span class="fa fa-heart"></span>
+									@endif
+								</li>
+								<li class="list-inline-item">{{$status->countLikes}} {{str_plural('like',$status->countLikes)}}</li>
 							</ul>
 						<!-- show replies -->
 						@foreach($status->replies as $reply)
@@ -27,8 +33,15 @@
 									<p>{{$reply->body}}</p>
 									<ul class="list-inline">
 										<li class="list-inline-item">{{$reply->created_at->diffForHumans()}}</li>
-										<li class="list-inline-item"><a href="#">Like</a></li>
-										<li class="list-inline-item">3 likes</li>
+										<li class="list-inline-item">
+											@if(!$reply->alreadyLikedByUser())
+												<a href="{{route('like-status',['statusToLike' =>$reply->id])}}">Like</a>
+											@else
+												<span class="fa fa-heart"></span>
+											@endif
+										</li>
+
+										<li class="list-inline-item">{{$reply->countLikes}} {{str_plural('like',$reply->countLikes)}}</li>
 									</ul>
 								</div>
 							</div>

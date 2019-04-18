@@ -85,3 +85,8 @@ Route::post('/status/{statusId}/reply',[
 	'uses'=>'StatusController@postReply',
 	'as' => 'status-reply',
 ]);
+
+Route::get('like-status/{statusToLike}/like',[
+	'uses' => 'LikeController@statusLike',
+	'as' => 'like-status'
+]);
