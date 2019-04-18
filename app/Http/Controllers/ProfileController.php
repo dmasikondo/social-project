@@ -16,17 +16,23 @@ class ProfileController extends Controller
     public function getProfile($email)
     {
     	$user = User::where('email',$email)->firstOrFail();
-    	return view('profile.index', compact('user'));
+    	$statuses = $user->statuses()->notReply()->orderBy('created_at','desc')->paginate(2);
+    	$authUserIsFriend = $user->isFriendsWith(Auth::user());
+    	return view('profile.index', compact('user','statuses','authUserIsFriend'));
     }
     /**
-     * [edit description]
+     * edit the user profile
      * @return [type] [description]
      */
     public function edit()
     {
     	return view('profile.edit');
     }
-
+    /**
+     * update user profile
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function update(Request $request)
     {
     	$this->validate($request,[

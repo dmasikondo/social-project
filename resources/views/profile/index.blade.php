@@ -3,8 +3,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-5">
-				@include('pages.template.partials.userblock')
-				<hr>
+				@include('pages.template.partials.timeline',[
+						'statusTitle' => "{$user->getFirstNameOrEmail()}'s Timeline",
+						'nothingOnTimeline' => "There is nothing on {$user->getFirstNameOrEmail()}'s timeline yet",
+						'conditionToRepyForm' => $authUserIsFriend,
+					])
 			</div>
 			<div class="col-lg-4 offset-lg-3">
 				@if(Auth::user()->hasFriendRequestPending($user))
