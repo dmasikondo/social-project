@@ -104,6 +104,14 @@ class User extends Authenticatable
         return $this->friendsOf()->attach($user->id);
     }
     /**
+     * unfriend
+     * @param User $user
+     */
+    public function unFriend(User $user) 
+    {
+        return $this->friendsOfMine()->detach($user->id);
+    }    
+    /**
      * accept the friend request
      * @param  User   $user [description]
      * @return [type]       [description]

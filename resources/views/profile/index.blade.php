@@ -15,7 +15,13 @@
 				@elseif(Auth::user()->hasFriendRequestReceived($user))
 					<p><a href="{{route('accept-friend', [$user->email])}}" class="btn btn-primary">Accept Friend Request</a></p>
 				@elseif(Auth::user()->isFriendsWith($user))
-					<p>You are friends with {{$user->getFirstNameOrEmail()}}</p>
+					<p>You are friends with {{$user->getFirstNameOrEmail()}}
+					</p>
+					<form action="{{route('remove-friend', [$user->email])}}" method="post">
+						@csrf
+						@method('patch')
+						<input type="submit" value="Unfriend {{$user->getFirstNameOrEmail()}}" class="btn btn-primary">
+					</form>
 				@elseif(Auth::user()->id !== $user->id)
 					<p><a href="{{route('add-friend', [$user->email])}}" class="btn btn-primary">Send Friend Request</a></p>
 				@endif				

@@ -85,13 +85,26 @@ Route::post('/status/{statusId}/reply',[
 	'uses'=>'StatusController@postReply',
 	'as' => 'status-reply',
 ]);
-
+/**
+ * like a status or status reply
+ */
 Route::get('like-status/{statusToLike}/like',[
 	'uses' => 'LikeController@statusLike',
 	'as' => 'like-status'
 ]);
-
+/**
+ * unlike a status or status reply
+ */
 Route::get('unlike-status/{statusToLike}/like',[
 	'uses' => 'LikeController@statusUnlike',
 	'as' => 'unlike-status'
+]);
+
+/**
+ * unfriend a friend
+ */
+
+Route::patch('friend/{usermail}/remove',[
+	'uses'=>'FriendController@removeFriend',
+	'as' => 'remove-friend',
 ]);

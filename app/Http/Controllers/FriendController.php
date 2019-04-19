@@ -69,4 +69,11 @@ class FriendController extends Controller
     	Auth::user()->acceptFriendRequest($user);
     	return redirect('/user/'.$user->email)->with('info','You are now friends');
     }
+
+    public function removeFriend($usermail)
+    {
+        $user = User::where('email', $usermail)->first();
+        Auth::user()->unFriend($user);
+        return redirect('/user/'.$user->email)->with('info',"You are nolonger friends with {$user->getFirstNameOrEmail()}");
+    }
 }
