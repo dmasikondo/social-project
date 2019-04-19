@@ -8,6 +8,10 @@ use Auth;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware(['auth']);
+    }
 	/**
 	 * [getProfile description]
 	 * @param  [type] $email [description]

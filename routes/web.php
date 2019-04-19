@@ -90,3 +90,8 @@ Route::get('like-status/{statusToLike}/like',[
 	'uses' => 'LikeController@statusLike',
 	'as' => 'like-status'
 ]);
+
+Route::get('unlike-status/{statusToLike}/like',[
+	'uses' => 'LikeController@statusUnlike',
+	'as' => 'unlike-status'
+]);

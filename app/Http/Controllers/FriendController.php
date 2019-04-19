@@ -8,6 +8,12 @@ use Social\User;
 
 class FriendController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware([
+            'auth',
+        ]);
+    }
 	/**
 	 * display a list of user's friends
 	 * @return \Illuminate\Http\Response

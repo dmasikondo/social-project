@@ -17,7 +17,10 @@
 									@if(!$status->alreadyLikedByUser())
 										<a href="{{route('like-status',['statusToLike' =>$status->id])}}">Like</a>
 									@else
-										<span class="fa fa-heart"></span>
+										<a href="{{route('unlike-status',['statusToLike' =>$status->id])}}">
+											<span class="fa fa-heart"></span>						
+										</a>
+										
 									@endif
 								</li>
 								<li class="list-inline-item">{{$status->countLikes}} {{str_plural('like',$status->countLikes)}}</li>
@@ -37,7 +40,9 @@
 											@if(!$reply->alreadyLikedByUser())
 												<a href="{{route('like-status',['statusToLike' =>$reply->id])}}">Like</a>
 											@else
-												<span class="fa fa-heart"></span>
+											<a href="{{route('unlike-status',['statusToLike' =>$reply->id])}}">
+												<span class="fa fa-heart"></span>						
+											</a>
 											@endif
 										</li>
 
