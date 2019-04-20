@@ -3,11 +3,16 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-5">
-				@include('pages.template.partials.timeline',[
-						'statusTitle' => "{$user->getFirstNameOrEmail()}'s Timeline",
-						'nothingOnTimeline' => "There is nothing on {$user->getFirstNameOrEmail()}'s timeline yet",
-						'conditionToRepyForm' => $authUserIsFriend,
-					])
+				<h2>{{$user->getFirstNameOrEmail()}}'s Timeline</h2>
+				<hr>
+				@if(!$statuses->count())				
+					<p>There is nothing on {{$user->getFirstNameOrEmail()}}'s timeline yet</p>				
+				@else
+					@foreach($statuses as $status)				
+						@include('pages.template.partials.timeline',['conditionToRepyForm' => Auth::user()->isFriendsWith($status->user)])
+				@endforeach
+				{!! $statuses->render() !!}
+			@endif						
 			</div>
 			<div class="col-lg-4 offset-lg-3">
 				@if(Auth::user()->hasFriendRequestPending($user))

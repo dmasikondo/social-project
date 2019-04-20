@@ -8,6 +8,11 @@
 		      <li class="nav-item">
 		        <a class="nav-link" href="{{route('friends')}}">Friends</a>
 		      </li>
+		     @auth
+		      <li class="nav-item">
+		      	<a href="{{route('user-status',[Auth::user()->email])}}" class="nav-link">Statuses</a>
+		      </li>
+		     @endauth
 		    <form action="/search" class="form-inline">
 		    	@csrf
 		    	<div class="form-group">
@@ -22,6 +27,25 @@
 
 			<ul class="navbar-nav">
 			@auth
+				<li class="nav-item dropdown">
+					<a href="" class="nav-link dropdown-toggle" id="notificationDropDownLink" data-toggle="dropdown" role="button" aria-expanded="false">
+						<span class="fa fa-globe"></span>
+							Notifications 
+							@if(auth()->user()->unreadNotifications->count())
+							<span class="badge badge-danger"> {{auth()->user()->unreadNotifications->count()}}
+							</span>	
+							@endif	
+					</a>
+			@if(auth()->user()->unreadNotifications->count())
+				<ul class="dropdown-menu" aria-labelledby="notificationDropDownLink">
+					@foreach(auth()->user()->unreadNotifications as $note)
+					<li class="dropdown-item">
+						@include('pages.template.partials.notifications.'.snake_case(class_basename($note->type)))
+					</li>
+					@endforeach
+				</ul>
+			@endif
+				</li>
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" id="navbarDropDownMenuLink" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">{{ Auth::user()->email }}</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">

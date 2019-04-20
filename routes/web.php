@@ -72,12 +72,24 @@ Route::get('/friend/{usermail}/accept',[
 	'as' => 'accept-friend',
 ]);
 /**
+ * show user's statuses
+ */
+Route::get('status/{usermail}/all',[
+	'uses' => 'StatusController@index',
+	'as' => 'user-status',
+]);
+/**
  * post a status
  */
 Route::post('/status',[
 	'uses'=>'StatusController@postStatus',
 	'as' => 'status',
 ]);
+Route::get('/status/{id}',[
+	'uses'=>'StatusController@showStatus',
+	'as' => 'status-show',
+]);
+
 /**
  * post a reply to a status
  */
@@ -108,3 +120,4 @@ Route::patch('friend/{usermail}/remove',[
 	'uses'=>'FriendController@removeFriend',
 	'as' => 'remove-friend',
 ]);
+
