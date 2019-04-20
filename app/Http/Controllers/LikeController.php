@@ -12,11 +12,17 @@ class LikeController extends Controller
     public function statusLike($statusToLike)
     {
     	$status = Status::where('id',$statusToLike)->firstOrFail();
-    	if(!$status->alreadyLikedByUser()){
+        $liker = Auth::user();
+        $friends = Auth::user()->friends();
+    	if(!$status->alreadyLikedByUser()){            
     		$status->likes()->create(['user_id' =>Auth::user()->id]);
+            foreach($friends as $friend)
+            {
+                $friend->notify(new \Social\Notifications\LikedStatus($liker, $status));
+            }             
     		return redirect()->back();
     	}
-    	else{
+    	else{            
     		return redirect()->back()->with('info','You have already liked this post');
     	}
     	

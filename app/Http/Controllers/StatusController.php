@@ -41,7 +41,13 @@ class StatusController extends Controller
     public function postStatus(Request $request)
     {
     	$this->validate($request,['timeline' => 'required']);
-    	Auth::user()->statuses()->create(['body' =>request()->timeline]);
+    	$status = Auth::user()->statuses()->create(['body' =>request()->timeline]);
+        $poster = Auth::user();
+        $friends = Auth::user()->friends();
+        foreach($friends as $friend)
+        {
+            $friend->notify(new \Social\Notifications\PostedStatus($poster, $status));
+        }        
     	return redirect()->route('home')->with('info','Status successfully updated');
     }
 

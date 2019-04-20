@@ -33,7 +33,7 @@
 							Notifications 
 							@if(auth()->user()->unreadNotifications->count())
 							<span class="badge badge-danger"> {{auth()->user()->unreadNotifications->count()}}
-							</span>	
+							</span>								
 							@endif	
 					</a>
 			@if(auth()->user()->unreadNotifications->count())
@@ -44,6 +44,12 @@
 					</li>
 					@endforeach
 				</ul>
+			@else
+				<ul class="dropdown-menu" aria-labelledby="notificationDropDownLink">
+					<li class="dropdown-item">
+						You have no unread notifications
+					</li>
+				</ul>			
 			@endif
 				</li>
 				<li class="nav-item dropdown">

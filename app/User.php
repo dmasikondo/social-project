@@ -36,10 +36,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    public function getFirstNameAttribute($query)
+    {
+        return ucwords($query);
+    }
     public function getFirstNameOrEmail()
     {
-        return ucwords($this->first_name) ? : $this->email;
+        return $this->first_name ? : $this->email;
     }
 
     public function friendsOfMine()

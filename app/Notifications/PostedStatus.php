@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class LikedStatus extends Notification
+class PostedStatus extends Notification
 {
     use Queueable;
 
@@ -16,11 +16,11 @@ class LikedStatus extends Notification
      *
      * @return void
      */
-    protected $liker;
+    protected $poster;
     protected $status;
-    public function __construct($liker, $status)
+    public function __construct($poster, $status)
     {
-        $this->liker = $liker;
+        $this->poster = $poster;
         $this->status = $status;
     }
 
@@ -58,9 +58,9 @@ class LikedStatus extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'liker' => $this->liker,
+            'poster' => $this->poster,
             'status' => $this->status,
-            'message' => 'liked a post',
+            'message' => 'posted a status',
         ];
     }
 }
