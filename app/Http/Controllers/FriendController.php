@@ -24,7 +24,8 @@ class FriendController extends Controller
     {
     	$friendRequests = Auth::user()->friendRequests();
     	$friends = Auth::user()->friends();
-    	return view('friends.index', compact('friends', 'friendRequests'));
+        $query = '';
+    	return view('friends.index', compact('friends', 'friendRequests','query'));
     }
     /**
      * add a new friend request in storage
