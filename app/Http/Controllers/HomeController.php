@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+       // $query = '';
         if(Auth::user()){
             $statuses = Status::notReply()->where(function($query)
             {

@@ -80,6 +80,7 @@ class FriendController extends Controller
     public function removeFriend($usermail)
     {
         $user = User::where('email', $usermail)->first();
+        $user->unFriend(Auth::user());
         Auth::user()->unFriend($user);
         return redirect('/user/'.$user->email)->with('info',"You are nolonger friends with {$user->getFirstNameOrEmail()}");
     }
