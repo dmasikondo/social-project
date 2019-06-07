@@ -17,5 +17,6 @@ The Social Project has the following key features:
 - Ability to reply
 - Like functionality
 - User Profile Update
+- Notifications
 
 
