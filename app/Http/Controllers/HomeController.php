@@ -31,6 +31,7 @@ class HomeController extends Controller
                 return $query->where('user_id', Auth::user()->id)
                 ->orWhereIn('user_id', Auth::user()->friends()->pluck('id'));
             })->orderBy('created_at','desc')->paginate(2);
+          
             return view('pages.home',compact('statuses'));
         }
         

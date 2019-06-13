@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class LikedStatus extends Notification
+class UpdatedProfileimage extends Notification
 {
     use Queueable;
 
@@ -16,15 +16,14 @@ class LikedStatus extends Notification
      *
      * @return void
      */
-    protected $liker;
-    protected $status;
-    protected $image;
-    public function __construct($liker, $status, $image)
+    protected $user;
+    protected $avatar;
+    public function __construct($user, $avatar)
     {
-        $this->liker = $liker;
-        $this->status = $status;
-        $this->image = $image;
+        $this->user = $user;
+        $this->avatar = $avatar;
     }
+    
 
     /**
      * Get the notification's delivery channels.
@@ -59,11 +58,10 @@ class LikedStatus extends Notification
      */
     public function toDatabase($notifiable)
     {
-        return [
-            'liker' => $this->liker,
-            'status' => $this->status,
-            'image' => $this->image,
-            'message' => 'liked a post',
+        return [            
+            'image' => $this->avatar,
+            'user' =>  $this->user,
+            'message' => 'updated the profile picture',
         ];
     }
 }

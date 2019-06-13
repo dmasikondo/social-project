@@ -1,5 +1,5 @@
 <div class="media">
-	<span class="fa fa-user mr-2 mt-3"></span>
+	<img src="{{asset('storage/avatar/avatar'.$status->user->nameOfAvatarImage())}}" class="rounded-circle"> &nbsp;
 	<div class="media-body">
 		<h4 class="media-heading">
 			<a href="/user/{{$status->user->email}}">{{$status->user->getFirstNameOrEmail()}}</a>
@@ -22,7 +22,7 @@
 	<!-- show replies -->
 	@foreach($status->replies as $reply)
 		<div class="media">
-			<span class="fa fa-user mr-2 mt-3"></span>
+			<img src="{{asset('storage/avatar/avatar'.$reply->user->nameOfAvatarImage())}}" class="rounded-circle"> &nbsp;
 			<div class="media-body">
 				<h5 class="media-heading">
 					<a href="/user/{{$reply->user->email}}">{{$reply->user->getFirstNameOrEmail()}}</a>

@@ -17,9 +17,11 @@ class AcceptedRequest extends Notification
      * @return void
      */
     protected $accepter;
-    public function __construct($accepter)
+    protected $image;
+    public function __construct($accepter, $image)
     {
         $this->accepter = $accepter;
+        $this->image = $image;
     }
 
     /**
@@ -56,6 +58,7 @@ class AcceptedRequest extends Notification
     {
         return [
             'acceptor' => $this->accepter,
+            'image' => $this->image,
             'message' =>'accepted your friend request',
         ];
     }

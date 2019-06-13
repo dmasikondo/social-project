@@ -18,10 +18,12 @@ class RepliedStatus extends Notification
      */
     protected $replier;
     protected $status;
-    public function __construct($replier, $status)
+    protected $image;
+    public function __construct($replier, $status, $image)
     {
         $this->replier = $replier;
         $this->status = $status;
+        $this->image = $image;
     }
 
     /**
@@ -60,6 +62,7 @@ class RepliedStatus extends Notification
         return [
             'replier' => $this->replier,
             'status' => $this->status,
+            'image' => $this->image,
             'message' => 'replied to a status',
         ];
     }

@@ -44,9 +44,13 @@ class StatusController extends Controller
     	$status = Auth::user()->statuses()->create(['body' =>request()->timeline]);
         $poster = Auth::user();
         $friends = Auth::user()->friends();
+        /**
+         * check if image is present or load default image
+         */
+        $image = Auth::user()->nameOfAvatarImage();        
         foreach($friends as $friend)
         {
-            $friend->notify(new \Social\Notifications\PostedStatus($poster, $status));
+            $friend->notify(new \Social\Notifications\PostedStatus($poster, $status, $image));
         }        
     	return redirect()->route('home')->with('info','Status successfully updated');
     }
@@ -64,9 +68,13 @@ class StatusController extends Controller
         $friends = Auth::user()->friends();
     	$reply = Auth::user()->statuses()->create(['body' =>request("reply-{$statusId}")]);
     	$status->replies()->save($reply);
+        /**
+         * check if image is present or load default image
+         */
+        $image = Auth::user()->nameOfAvatarImage();         
         foreach($friends as $friend)
         {
-            $friend->notify(new \Social\Notifications\RepliedStatus($replier, $status));
+            $friend->notify(new \Social\Notifications\RepliedStatus($replier, $status, $image));
         }        
     	return redirect()->back()->with('info','Reply successfully updated');
     }

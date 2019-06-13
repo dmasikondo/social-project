@@ -27,6 +27,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+   /* public function images()
+    {
+        return $this->hasMany(Image::class);
+    }*/
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 
     /**
      * The attributes that should be cast to native types.
@@ -138,5 +146,25 @@ class User extends Authenticatable
     public function statuses()
     {
         return $this->hasMany(Status::class);
+    }
+
+    /**
+     * check the avatar image belonging to user
+     */
+    
+    public function nameOfAvatarImage()
+    {
+        $images = $this->images()->where('isprofile', true)->latest()->limit(1)->get();
+        if($images->count())
+        {
+            foreach($images as $image){
+                $image = $image->name;
+                return $image;
+            }
+        }
+        else{
+            $image = 'default.png';
+            return $image;
+        }        
     }
 }

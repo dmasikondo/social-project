@@ -17,9 +17,11 @@ class FriendRequest extends Notification
      * @return void
      */
     protected $requester;
-    public function __construct($requester)
+    protected $image;
+    public function __construct($requester, $image)
     {
         $this->requester = $requester;
+        $this->image = $image;
     }
 
     /**
@@ -57,6 +59,7 @@ class FriendRequest extends Notification
         //dd($notifiable->first_name);
         return [
              'requester'=> $this->requester,
+             'image' =>$this->image,
              'message' => 'sent you a friend request',
         ];
     }

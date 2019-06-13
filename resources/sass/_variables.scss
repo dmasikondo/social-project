@@ -3,7 +3,8 @@
 $body-bg: #f8fafc;
 
 // Typography
-$font-family-sans-serif: "Nunito", sans-serif;
+// $font-family-sans-serif: "Nunito", sans-serif;
+$font-family-sans-serif: sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
@@ -18,3 +19,8 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+a:hover {
+  color: #1d68a7;
+  text-decoration: underline;
+}

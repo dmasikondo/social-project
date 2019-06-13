@@ -18,10 +18,12 @@ class PostedStatus extends Notification
      */
     protected $poster;
     protected $status;
-    public function __construct($poster, $status)
+    protected $image;
+    public function __construct($poster, $status, $image)
     {
         $this->poster = $poster;
         $this->status = $status;
+        $this->image = $image;
     }
 
     /**
@@ -60,7 +62,8 @@ class PostedStatus extends Notification
         return [
             'poster' => $this->poster,
             'status' => $this->status,
-            'message' => 'posted a status',
+            'image' => $this->image,
+            'message' => 'posted a  new status',
         ];
     }
 }

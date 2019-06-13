@@ -25,7 +25,11 @@ class FriendController extends Controller
     	$friendRequests = Auth::user()->friendRequests();
     	$friends = Auth::user()->friends();
         $query = '';
-    	return view('friends.index', compact('friends', 'friendRequests','query'));
+        /**
+         * check if image is present or load default image
+         */
+        $image = Auth::user()->nameOfAvatarImage();        
+    	return view('friends.index', compact('friends', 'friendRequests','query','image'));
     }
     /**
      * add a new friend request in storage
@@ -56,8 +60,13 @@ class FriendController extends Controller
 			return redirect()->route('home');
 		}
     	Auth::user()->addFriend($user);
-        $user->notify(new \Social\Notifications\FriendRequest($requester));
-    	return redirect('/user/'.$user->email)->with('info','Friend request successfully sent');
+        /**
+         * check if image is present or load default image
+         */
+        $image = Auth::user()->nameOfAvatarImage();
+       
+        $user->notify(new \Social\Notifications\FriendRequest($requester, $image));
+    	return redirect('/user/'.$user->email)->with('info',"Friend request to $user->email successfully sent");
     }
 
     public function acceptFriend($usermail)
@@ -73,8 +82,12 @@ class FriendController extends Controller
     		return redirect()->route('home');
     	}  	
     	Auth::user()->acceptFriendRequest($user);
-        $user->notify(new \Social\Notifications\AcceptedRequest($accepter));
-    	return redirect('/user/'.$user->email)->with('info','You are now friends');
+        /**
+         * check if image is present or load default image
+         */
+        $image = Auth::user()->nameOfAvatarImage();        
+        $user->notify(new \Social\Notifications\AcceptedRequest($accepter, $image));
+    	return redirect('/user/'.$user->email)->with('info',"You are now friends with {$user->getFirstNameOrEmail()}");
     }
 
     public function removeFriend($usermail)

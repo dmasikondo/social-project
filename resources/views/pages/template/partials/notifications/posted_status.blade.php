@@ -1,3 +1,7 @@
 <a href="/status/{{$note->data['status']['id']}}">
-	{{$note->data['poster']['first_name']}} {{$note->data['message']}} - {{$note->created_at->diffForHumans()}}
+	@include('pages.template.partials.notifications.includes.avatar_image') 
+	{{$note->data['poster']['first_name']? : $note->data['poster']['email']}} 
+	{{$note->data['message']}} 
+	&nbsp; "{{str_limit($note->data['status']['body'], 10, '...')}}"
+	- {{$note->created_at->diffForHumans()}}
 </a>

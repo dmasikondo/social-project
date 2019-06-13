@@ -32,28 +32,26 @@
 						<span class="fa fa-globe"></span>
 							Notifications 
 							@if(auth()->user()->unreadNotifications->count())
-							<span class="badge badge-danger"> {{auth()->user()->unreadNotifications->count()}}
-							</span>								
+								<span class="badge badge-danger"> {{auth()->user()->unreadNotifications->count()}}
+								</span>								
 							@endif	
 					</a>
-			@if(auth()->user()->unreadNotifications->count())
 				<ul class="dropdown-menu" aria-labelledby="notificationDropDownLink">
 					@foreach(auth()->user()->unreadNotifications as $note)
-					<li class="dropdown-item">
-						@include('pages.template.partials.notifications.'.snake_case(class_basename($note->type)))
-					</li>
+						<li class="dropdown-item" style="background: #ccc">
+							@include('pages.template.partials.notifications.'.snake_case(class_basename($note->type)))
+						</li>
 					@endforeach
+						@foreach(auth()->user()->readNotifications as $note)
+							<li class="dropdown-item">
+								@include('pages.template.partials.notifications.'.snake_case(class_basename($note->type)))
+							</li>
+						@endforeach				
 				</ul>
-			@else
-				<ul class="dropdown-menu" aria-labelledby="notificationDropDownLink">
-					<li class="dropdown-item">
-						You have no unread notifications
-					</li>
-				</ul>			
-			@endif
-				</li>
 				<li class="nav-item dropdown">
-					<a href="#" class="nav-link dropdown-toggle" id="navbarDropDownMenuLink" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">{{ Auth::user()->getFirstNameOrEmail() }}</a>
+					<a href="#" class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropDownMenuLink" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">						
+                        @include('pages.template.partials.avatar')
+						<span class=""> &nbsp; &nbsp; &nbsp;{{ Auth::user()->getFirstNameOrEmail() }}</span> </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
 						<a href="{{route('user-profile.edit')}}" class="dropdown-item">Update Profile</a>
 						<a href="/logout" class="dropdown-item">Logout</a>

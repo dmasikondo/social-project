@@ -18,7 +18,11 @@ class LikeController extends Controller
     		$status->likes()->create(['user_id' =>Auth::user()->id]);
             foreach($friends as $friend)
             {
-                $friend->notify(new \Social\Notifications\LikedStatus($liker, $status));
+            /**
+             * check if image is present or load default image
+             */
+            $image = Auth::user()->nameOfAvatarImage();                
+                $friend->notify(new \Social\Notifications\LikedStatus($liker, $status, $image));
             }             
     		return redirect()->back();
     	}

@@ -8,7 +8,7 @@
 						Edit My Profile
 					</div>
 					<div class="card-body">
-						<form action="{{route('post.user-profile')}}" method="post">
+						<form action="{{route('post.user-profile')}}" method="post" enctype="multipart/form-data">
 						@csrf
 						@method('patch')
 							<div class="form-group">
@@ -38,6 +38,19 @@
 									</span>
 								@endif								
 							</div>
+							<div class="form-group d-flex flex-column">
+								<label for="image" id="image">Update Profile Picture 
+								@foreach($image as $image)
+									<img src="{{asset('storage/uploads/'.$image->name)}}" alt="" width="200"   align="right" class="rounded-circle">
+								@endforeach
+								</label>
+								<input type="file" name="image" class="form-control {{$errors->has('image')? 'is-invalid' : ''}}" value="{{old('image')? : Auth::user()->image}} py-2" accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp">
+								@if($errors->has('image'))
+									<span class="invalid-feedback" role="alert">
+										<strong>{{$errors->first('image')}}</strong>
+									</span>
+								@endif								
+							</div>							
 							<div class="form-group">
 								<button class="btn btn-outline-success" type="submit">Update</button>
 							</div>															

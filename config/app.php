@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        
+        intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -173,6 +175,7 @@ return [
         Social\Providers\AuthServiceProvider::class,
         // Social\Providers\BroadcastServiceProvider::class,
         Social\Providers\EventServiceProvider::class,
+        Social\Providers\TelescopeServiceProvider::class,
         Social\Providers\RouteServiceProvider::class,
 
     ],
@@ -225,6 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Image' => intervention\Image\Facades\Image::class,
 
     ],
 
