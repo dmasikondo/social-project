@@ -17,7 +17,8 @@
 					
 				@endif
 			</li>
-			<li class="list-inline-item">{{$status->countLikes}} {{str_plural('like',$status->countLikes)}}</li>
+			<li class="list-inline-item">{{$status->countLikes}} {{str_plural('like',$status->countLikes)}}
+			</li>
 		</ul>
 	<!-- show replies -->
 	@foreach($status->replies as $reply)

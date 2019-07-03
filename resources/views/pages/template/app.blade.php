@@ -10,9 +10,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <title>Social</title>
 
-	</head>	
-		@include('pages.template.partials.navigation')
-        @include('alert')
-		@yield('content')
+	</head>
+    <body>	
+        <div id="app">
+    		@include('pages.template.partials.navigation')
+            @include('alert')
+    		@yield('content')
+        </div>
 	</body>
 </html>

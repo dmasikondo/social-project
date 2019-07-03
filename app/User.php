@@ -53,6 +53,11 @@ class User extends Authenticatable
         return $this->first_name ? : $this->email;
     }
 
+    public function getFullnameOrEmail()
+    {
+        return  $this->first_name ? ($this->first_name.' '.$this->last_name): $this->email;
+    }
+
     public function friendsOfMine()
     {
         return $this->belongsToMany('Social\User', 'friends','user_id', 'friend_id');
@@ -149,6 +154,14 @@ class User extends Authenticatable
     }
 
     /**
+     * find user's number of friends
+     */
+    public function numberOfFriends()
+    {
+        return $this->friends()->count();
+    }
+
+    /**
      * check the avatar image belonging to user
      */
     
@@ -167,4 +180,25 @@ class User extends Authenticatable
             return $image;
         }        
     }
+    /**
+     * check the profile image belonging to user
+     */
+    
+    public function nameOfProfileImage()
+    {
+        $images = $this->images()->where('isprofile', true)->latest()->limit(1)->get();
+        if($images->count())
+        {
+            foreach($images as $image){
+                $image = $image->name;
+                return $image;
+            }
+        }
+        else{
+            $image = 'default.jpg';
+            return $image;
+        }        
+    }    
+
+
 }

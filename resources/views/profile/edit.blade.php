@@ -1,5 +1,6 @@
 @extends('pages.template.app')
 @section('content')
+	<div class="spacer"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">

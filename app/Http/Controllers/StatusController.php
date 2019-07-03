@@ -21,7 +21,7 @@ class StatusController extends Controller
     {
         $user = User::where('email',$usermail)->firstOrFail();
         $statuses = $user->statuses()->notReply()->paginate(3);
-         return view('pages.home',compact('statuses'));
+        return view('pages.home',compact('statuses'));
     }
     /**
      * show requested status

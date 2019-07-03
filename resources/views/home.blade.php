@@ -1,6 +1,6 @@
 @extends('pages.template.app')
-
 @section('content')
+@include('timeline.partials.profile_header')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
